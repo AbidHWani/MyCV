@@ -9,13 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Visualization & Content Choices: 
-        - Objective/Summary -> Goal: Inform -> Presentation: Prominent text block in the hero section to immediately state the candidate's career goals.
-        - Publications List -> Goal: Organize & Analyze -> Presentation: An interactive, filterable list. Interaction: Users can filter by year or type (Journal/Book Chapter) to easily navigate the extensive list. Justification: This allows reviewers to quickly assess the relevance and recency of the candidate's work.
-        - Publication Trend -> Goal: Show Change/Growth -> Presentation: A Bar Chart (Chart.js/Canvas). Interaction: The chart is dynamic and provides a quick visual summary of research productivity, a critical factor for academic positions. Justification: A chart is more impactful for showing trends than a simple list.
-        - Education -> Goal: Inform -> Presentation: A clean, vertical timeline layout using HTML/CSS for easy chronological understanding.
-        - Skills -> Goal: Organize & Inform -> Presentation: Grouped lists with styled tags/badges. Justification: This is more visually appealing and scannable than a standard bulleted list.
-        - Library/Method: Chart.js for the publication chart. All other visuals are achieved with structured HTML and Tailwind CSS. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -36,16 +29,9 @@
                 height: 400px;
             }
         }
-        .nav-link {
-            transition: color 0.3s, border-color 0.3s;
-        }
-        .nav-link.active {
-            color: #0d9488;
-            border-bottom-color: #0d9488;
-        }
-        .publication-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+        .nav-link { transition: color 0.3s, border-color 0.3s; }
+        .nav-link.active { color: #0d9488; border-bottom-color: #0d9488; }
+        .publication-card { transition: transform 0.3s, box-shadow 0.3s; }
         .publication-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -86,7 +72,7 @@
             <p class="mt-4 text-lg md:text-xl text-teal-700 font-medium">Plant Scientist | Educator | Data Analyst</p>
             <div class="mt-8 max-w-3xl mx-auto text-gray-600 text-lg leading-relaxed">
                 <p>
-                    A highly accomplished and recently graduated Doctor of Philosophy in Botany, demonstrating significant research productivity with 8 peer-reviewed journal publications and 2 book chapters. Expertise in plant stress physiology, biostatistics, and advanced analytical techniques, with a primary research focus on silicon-mediated biotic and abiotic stress amelioration in economically important crops. Aspiring to secure an Assistant Professor position at RSAM University, Andhra Pradesh, to contribute to its research eminence by investigating locally relevant agricultural challenges, developing a robust, externally-funded research program, and delivering high-impact teaching and mentorship to cultivate future botanists and agricultural scientists in the region.
+                    A highly accomplished and recently graduated Doctor of Philosophy in Botany, demonstrating significant research productivity with 9 peer-reviewed journal publications and 2 book chapters (11 total). Expertise in plant stress physiology, biostatistics, and advanced analytical techniques, with a primary research focus on silicon-mediated biotic and abiotic stress amelioration in economically important crops.
                 </p>
             </div>
             <div class="mt-8 flex flex-wrap justify-center gap-4">
@@ -164,7 +150,7 @@
 
         <section id="publications" class="py-20">
             <h2 class="text-3xl font-bold text-center mb-4 text-gray-800">Publications</h2>
-            <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">My research has resulted in 8 peer-reviewed journal articles and 2 book chapters, contributing to the understanding of plant science and sustainable agriculture. This chart highlights my publication output during my doctoral studies.</p>
+            <p class="text-center max-w-3xl mx-auto mb-12 text-gray-600">My research has resulted in 9 peer-reviewed journal articles and 2 book chapters (11 total), contributing to the understanding of plant science and sustainable agriculture. This chart highlights my publication output during my doctoral studies.</p>
             
             <div class="chart-container mb-12">
                 <canvas id="publicationsChart"></canvas>
@@ -184,8 +170,7 @@
                 </select>
             </div>
 
-            <div id="publications-list" class="space-y-6">
-            </div>
+            <div id="publications-list" class="space-y-6"></div>
         </section>
         
         <section id="teaching" class="py-20 bg-white rounded-2xl">
@@ -254,23 +239,88 @@
     </footer>
 
     <script>
+        /* === UPDATED, RG-ALIGNED PUBLICATIONS (11 total) === */
         const publicationsData = [
-            { year: 2025, type: 'journal', title: 'Apportioning and modeling the anthropogenic fingerprints in a Himalayan freshwater lake over the last ∼ 3.7 ka: Insights into pollution chronology and future policy implications', authors: 'Hassan, S., Bali, B. S., Arora, P., Ali, S. N., Morthekai, P., Muneer, W., Wani, A. H., Sabreena, Yaseen, A., Zaman, M., & Ganai, B. A.', journal: 'Environmental Chemistry and Ecotoxicology, 7, 547-564.', url: 'https://doi.org/10.1016/j.enceco.2025.02.015' },
-            { year: 2025, type: 'journal', title: 'Silicon Supplementation Reinforces Maize Defence to Defeat the Oriental Armyworm', authors: 'Shameen, F., Wani, A. H., Gulzar, I., Ahmad, T., & Rashid, I.', journal: 'Journal of Applied Entomology, e13434.', url: 'https://doi.org/10.1111/jen.13434' },
-            { year: 2025, type: 'journal', title: 'Silicon supplementation mitigates the effects of infestation of corn leaf aphid, Rhopalosiphum maidis Fitch (Hemiptera: Aphididae)', authors: 'Shameen, F., Gulzar, I., Wani, A. H., Malik, M. A., Rashid, I., & Ahmad, T.', journal: 'Phytoparasitica, 53, 53.', url: 'https://doi.org/10.1007/s12600-025-01276-5' },
-            { year: 2024, type: 'journal', title: 'Transporters regulate silicon uptake to make stripe rust resistant wheat genotypes more effective', authors: 'Wani, A. H., Rashid, I., Rather, R. A., & John, R.', journal: 'Plant Physiology and Biochemistry, 217, 109217.', url: 'https://doi.org/10.1016/j.plaphy.2024.109217' },
-            { year: 2024, type: 'journal', title: 'Deciphering source, degradation status and temporal trends of organic matter in a Himalayan freshwater lake using multiproxy indicators, optically stimulated luminescence dating and time series forecasting', authors: 'Hassan, S., Bali, B. S., Muneer, W., Ali, S. N., Morthekai, P., Wani, A. H., & Ganai, B. A.', journal: 'Science of the Total Environment, 957, 177618.', url: 'https://doi.org/10.1016/j.scitotenv.2024.177618' },
-            { year: 2023, type: 'journal', title: 'Do genotypes ameliorate herbivory stress through silicon amendments differently? A case study of wheat', authors: 'Malik, M. A., Wani, A. H., Rashid, I., Tahir, I., Gulzar, I., Shameen, F., & Ahmad, T.', journal: 'Plant Physiology and Biochemistry, 196, 339-349.', url: 'https://doi.org/10.1016/j.plaphy.2023.02.022' },
-            { year: 2023, type: 'journal', title: 'Silicon en route from loam to leaf', authors: 'Wani, A.H., Mir S.H., Mir, Kumar S, Malik MA, Tyub S, & Rashid I.', journal: 'Plant Growth Regulation, 99(3), 465–476.', url: 'https://doi.org/10.1007/s10725-022-00931-9' },
-            { year: 2022, type: 'book', title: 'Biofertilizers: the role in sustainable agriculture', authors: 'Rehman, I. U., Islam, T., Wani, A. H., Rashid, I., Sheergojri, I. A., & Bandh, M. M.', journal: 'In Sustainable agriculture: technical progressions and transitions (pp. 25-38).', url: '#' },
-            { year: 2022, type: 'book', title: 'Nitrogen biofertilizers: role in sustainable agriculture', authors: 'Rehmaan, I. U., Jan, B., Khan, N. F., Islam, T., Rehman, S., Sheergojri, I. A., Rashid, I., & Wani, A. H.', journal: 'In Advances in plant nitrogen metabolism (pp. 170-184).', url: '#' },
-            { year: 2021, type: 'journal', title: 'Elucidating the role of silicon in drought stress tolerance in plants', authors: 'Malik, M. A., Wani, A. H., Mir, S. H., Rehman, I. U., Tahir, I., Ahmad, P., & Rashid, I.', journal: 'Plant Physiology and Biochemistry, 165, 187-195.', url: 'https://doi.org/10.1016/j.plaphy.2021.04.021' },
+            /* 2025 */
+            { year: 2025, type: 'journal',
+              title: 'Silicon supplementation in wheat: its effect on feeding preferences and development of bird cherry oat aphid, Rhopalosiphum padi (Hemiptera: Aphididae)',
+              authors: 'Iqra Gulzar, Farhana Shameen, Abid Hussain Wani, Tariq Ahmad, Mushtaq Ahmad Malik',
+              journal: 'Article (Nov 2025).',
+              url: 'https://www.researchgate.net/publication/397940038_Silicon_supplementation_in_wheat_its_effect_on_feeding_preferences_and_development_of_bird_cherry_oat_aphid_Rhopalosiphum_padi_Hemiptera_Aphididae'
+            },
+            { year: 2025, type: 'journal',
+              title: 'Silicon Supplementation Reinforces Maize Defence to Defeat the Oriental Armyworm',
+              authors: 'Farhana Shameen, Abid Hussain Wani, Iqra Gulzar, Irfan Rashid',
+              journal: 'Journal of Applied Entomology (Apr 2025), e13434.',
+              url: 'https://doi.org/10.1111/jen.13434'
+            },
+            { year: 2025, type: 'journal',
+              title: 'Silicon supplementation mitigates the effects of infestation of corn leaf aphid, Rhopalosiphum maidis Fitch (Hemiptera: Aphididae)',
+              authors: 'Farhana Shameen, Iqra Gulzar, Abid Hussain Wani, Mushtaq Ahmad Malik, Irfan Rashid, Tariq Ahmad',
+              journal: 'Phytoparasitica (May 2025).',
+              url: 'https://doi.org/10.1007/s12600-025-01276-5'
+            },
+            { year: 2025, type: 'journal',
+              title: 'Apportioning and modeling the anthropogenic fingerprints in a Himalayan freshwater lake over the last ∼ 3.7 ka: Insights into pollution chronology and future policy implications',
+              authors: 'Shahnawaz Hassan, Bikram S. Bali, Prachita Arora, Sabreena N. Ali, P. Morthekai, Wani Muneer, Abid Hussain Wani, Yaseen, A., Muzamil Zaman, Bashir A. Ganai',
+              journal: 'Environmental Chemistry and Ecotoxicology 7, 547–564 (Mar 2025).',
+              url: 'https://www.sciencedirect.com/science/article/pii/S2590182625000244'
+            },
+
+            /* 2024 */
+            { year: 2024, type: 'journal',
+              title: 'Transporters regulate silicon uptake to make stripe rust resistant wheat genotypes more effective',
+              authors: 'Abid Hussain Wani, Irfan Rashid, Rayees Ahmad Rather, Riffat John',
+              journal: 'Plant Physiology and Biochemistry 217, 109217 (Oct 2024).',
+              url: 'https://doi.org/10.1016/j.plaphy.2024.109217'
+            },
+            { year: 2024, type: 'journal',
+              title: 'Deciphering source, degradation status and temporal trends of organic matter in a Himalayan freshwater lake using multiproxy indicators, optically stimulated luminescence dating and time series forecasting',
+              authors: 'Shahnawaz Hassan, Bikram S. Bali, Wani Muneer, Sabreena N. Ali, P. Morthekai, Abid Hussain Wani, Bashir A. Ganai',
+              journal: 'Science of the Total Environment 957, 177618 (Dec 2024).',
+              url: 'https://doi.org/10.1016/j.scitotenv.2024.177618'
+            },
+
+            /* 2023 */
+            { year: 2023, type: 'journal',
+              title: 'Do genotypes ameliorate herbivory stress through silicon amendments differently? A case study of wheat',
+              authors: 'Mushtaq Ahmad Malik, Abid Hussain Wani, Irfan Rashid, Iqra Tahir, Iqra Gulzar, Farhana Shameen, Tariq Ahmad',
+              journal: 'Plant Physiology and Biochemistry 196, 339–349 (Mar 2023).',
+              url: 'https://doi.org/10.1016/j.plaphy.2023.02.022'
+            },
+
+            /* 2022 */
+            { year: 2022, type: 'journal',
+              title: 'Silicon en route from loam to leaf',
+              authors: 'Abid Hussain Wani, Showkat Hamid Mir, Santosh Kumar, Mushtaq Ahmad Malik, Sumira Tyub, Irfan Rashid',
+              journal: 'Plant Growth Regulation 99(3), 465–476 (Nov 2022).',
+              url: 'https://doi.org/10.1007/s10725-022-00931-9'
+            },
+            { year: 2022, type: 'book',
+              title: 'Nitrogen biofertilizers: role in sustainable agriculture',
+              authors: 'Ishfaq Ul Rehman, Bushra Jan, Nafeesa Farooq Khan, Tajamul Islam, Summia Rehman, Irfan Rashid, Abid Hussain Wani',
+              journal: 'In Advances in Plant Nitrogen Metabolism (Nov 2022).',
+              url: '#'
+            },
+
+            /* 2021 */
+            { year: 2021, type: 'book',
+              title: 'Biofertilizers: the role in sustainable agriculture',
+              authors: 'Ishfaq Ul Rehman, Tajamul Islam, Abid Hussain Wani, Summia Rehman, Ishfaq A. Sheergojri, M. M. Bandh',
+              journal: 'In Sustainable Agriculture: Technical Progressions and Transitions (Oct 2021).',
+              url: '#'
+            },
+            { year: 2021, type: 'journal',
+              title: 'Elucidating the role of silicon in drought stress tolerance in plants',
+              authors: 'Mushtaq Ahmad Malik, Abid Hussain Wani, Showkat H. Mir, Ishfaq Ul Rehman, Iqra Tahir, Parvaiz Ahmad, Irfan Rashid',
+              journal: 'Plant Physiology and Biochemistry 165, 187–195 (May 2021).',
+              url: 'https://doi.org/10.1016/j.plaphy.2021.04.021'
+            }
         ];
 
         function renderPublications(filter = 'all') {
             const list = document.getElementById('publications-list');
             list.innerHTML = '';
-            
             const yearFilterValue = document.getElementById('yearFilter').value;
 
             const filteredData = publicationsData.filter(p => {
@@ -344,27 +394,16 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                stepSize: 1
-                            }
-                        }
+                        y: { beginAtZero: true, ticks: { stepSize: 1 } }
                     },
                     plugins: {
-                        legend: {
-                            display: false
-                        },
+                        legend: { display: false },
                         tooltip: {
-                             callbacks: {
+                            callbacks: {
                                 label: function(context) {
                                     let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed.y !== null) {
-                                        label += context.parsed.y;
-                                    }
+                                    if (label) label += ': ';
+                                    if (context.parsed.y !== null) label += context.parsed.y;
                                     return label;
                                 }
                             }
@@ -386,9 +425,7 @@
                 });
             }, { rootMargin: '-30% 0px -70% 0px' });
 
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+            sections.forEach(section => observer.observe(section));
         });
     </script>
 </body>
